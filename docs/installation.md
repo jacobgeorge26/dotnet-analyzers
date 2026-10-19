@@ -45,3 +45,14 @@ Use the following override for build projects:
 [build/**.cs]
 dotnet_diagnostic.NET0001.severity = none
 ```
+
+### NET0002: `Do not use Console.Write/WriteLine`
+
+Build scripts, such as a Nuke `build/` project, conflict with rule `NET0002: Do not use Console.Write/WriteLine`.
+They write to the console with no logging setup to use instead.
+Use the following override for build projects:
+
+```ini
+[build/**.cs]
+dotnet_diagnostic.NET0002.severity = none
+```
