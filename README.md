@@ -10,7 +10,8 @@ Supports .NET 10 SDK and newer.
 
 ## Rules
 
-| ID       | Severity | Rule                                                                                     |
-|----------|----------|------------------------------------------------------------------------------------------|
+| ID        | Severity | Rule                                               |
+|-----------|----------|----------------------------------------------------|
+| `NET0001` | Error    | Do not use `Environment.GetEnvironmentVariable(s)` |
 
 To disable a rule or change its severity, see [disabling a rule](docs/installation.md#disabling-a-rule).

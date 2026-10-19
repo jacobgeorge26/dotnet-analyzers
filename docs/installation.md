@@ -34,3 +34,14 @@ To try an unreleased version of the analyzers, see [local development](local-dev
 
 Some IDE suggestions and compiler warnings conflict with or duplicate these rules.
 Add these to the repo's `.editorconfig` to resolve in favour of the installed dotnet analyzers.
+
+### NET0001: `Do not use Environment.GetEnvironmentVariable(s)`
+
+Build scripts, such as a Nuke `build/` project, conflict with rule `NET0001: Do not use Environment.GetEnvironmentVariable(s)`.
+They read CI environment variables, with no `IOptions<T>` setup to use instead.
+Use the following override for build projects:
+
+```ini
+[build/**.cs]
+dotnet_diagnostic.NET0001.severity = none
+```
