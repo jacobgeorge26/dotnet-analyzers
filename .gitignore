@@ -1,0 +1,9 @@
+[Bb]in/
+[Oo]bj/
+/artifacts/
+*.nupkg
+*.user
+*.DotSettings.user
+.idea/
+.vs/
+.DS_Store
