@@ -1,0 +1,10 @@
+<Project>
+
+    <!-- Older compilers skip the analyzers with only a CS9057 warning, so fail the build instead -->
+    <Target Name="_DotnetAnalyzersCheckSdkVersion"
+            BeforeTargets="CoreCompile"
+            Condition="'$(NETCoreSdkVersion)' != '' and $([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '10.0.100'))">
+        <Error Text="Dotnet.Analyzers requires the .NET 10 SDK or newer, but this build is using $(NETCoreSdkVersion). Update the SDK, or the version in global.json." />
+    </Target>
+
+</Project>

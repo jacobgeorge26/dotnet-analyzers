@@ -1,0 +1,9 @@
+workflow: GitHubFlow/v1
+next-version: 1.0.0 # Only used until the first tag
+commit-message-incrementing: Disabled # Versions only come from tags, not +semver: messages
+
+branches:
+  main:
+    mode: ManualDeployment # Untagged commits stay pre-release until tagged
+    label: ''
+    increment: Patch

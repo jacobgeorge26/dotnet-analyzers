@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Analyzers must target netstandard2.0 to load in every compiler host (RS1041) -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Dotnet.Analyzers</PackageId>
+        <Authors>Jacob Brown</Authors>
+        <Description>Roslyn analyzers for .NET services</Description>
+        <PackageTags>roslyn;analyzers</PackageTags>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/jacobgeorge26/dotnet-analyzers</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/jacobgeorge26/dotnet-analyzers</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <!-- Analyzer package layout: the DLL goes under analyzers/, not lib/,
+    and users get no runtime or Roslyn dependencies -->
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
+    </PropertyGroup>
+
+    <!-- https://devblogs.microsoft.com/dotnet/producing-packages-with-source-link/#deterministic-builds -->
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.9.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <!-- The compiler in the .NET 10 SDK; the minimum SDK users need. Older compilers skip the analyzers (CS9057) -->
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
+        <None Include="../README.md" Pack="true" PackagePath="" Visible="false"/>
+        <!-- Fails the build on SDKs older than .NET 10 -->
+        <None Include="build/Dotnet.Analyzers.targets" Pack="true" PackagePath="build;buildTransitive"/>
+    </ItemGroup>
+
+</Project>
