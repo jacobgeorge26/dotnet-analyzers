@@ -16,5 +16,6 @@ Supports .NET 10 SDK and newer.
 | `NET0002` | Error    | Do not use `Console.Write`/`WriteLine`                                            |
 | `NET0003` | Error    | Do not use static `Serilog.Log` in instance members                               |
 | `NET0004` | Error    | Do not use a primary constructor parameter after passing it to a base constructor |
+| `NET0005` | Error    | Do not initialize test class members at their declaration                         |
 
 To disable a rule or change its severity, see [disabling a rule](docs/installation.md#disabling-a-rule).

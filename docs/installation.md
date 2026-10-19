@@ -66,3 +66,13 @@ To avoid the same use being reported twice, use the following override for all p
 [*.cs]
 dotnet_diagnostic.CS9107.severity = none
 ```
+
+### NET0005: `Do not initialize test class members at their declaration`
+
+ReSharper's `Convert constructor into member initializers` suggestion conflicts with rule `NET0005: Do not initialize test class members at their declaration`.
+Where the constructor is the setup (xUnit, MSTest), use the following override for test projects:
+
+```ini
+[**/*Tests*/**.cs]
+resharper_convert_constructor_to_member_initializers_highlighting = none
+```
