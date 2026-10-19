@@ -1,9 +1,14 @@
 # Troubleshooting
 
+## "Dotnet.Analyzers requires the .NET 10 SDK or newer"
+
+The package fails the build on older SDKs, since their compilers can't load the analyzers.
+Update to .NET 10 SDK or newer, and check the SDK version in the repo's `global.json`.
+
 ## `CS9057`: the analyzer references a newer version of the compiler
 
-The user's SDK is older than the analyzer's `Microsoft.CodeAnalysis.CSharp` reference, so no rules run.
-Update to .NET 10 SDK or newer.
+The user's compiler is older than the analyzer's `Microsoft.CodeAnalysis.CSharp` reference, so no rules run.
+The SDK check above should catch this first; if not, e.g. on a .NET 10 preview SDK, update to the released .NET 10 SDK or newer.
 
 ## A new patch isn't picked up locally
 
