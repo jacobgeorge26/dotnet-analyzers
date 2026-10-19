@@ -56,3 +56,13 @@ Use the following override for build projects:
 [build/**.cs]
 dotnet_diagnostic.NET0002.severity = none
 ```
+
+###  NET0004: `Do not use a primary constructor parameter after passing it to a base constructor`
+
+The compiler's `CS9107: Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor` warning duplicates rule `NET0004: BanBaseForwardedParameterUse`.
+To avoid the same use being reported twice, use the following override for all projects:
+
+```ini
+[*.cs]
+dotnet_diagnostic.CS9107.severity = none
+```
