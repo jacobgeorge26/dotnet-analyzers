@@ -1,0 +1,16 @@
+name: Lint
+on:
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+      - name: Identify whitespace formatting issues
+        run: dotnet format whitespace --verify-no-changes --verbosity diagnostic
